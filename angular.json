@@ -31,8 +31,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bulma/css/bulma.css"
+              "node_modules/bulma/css/bulma.css",
+              "node_modules/animate.css/animate.min.css",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -104,9 +105,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "pos-store"
+  "defaultProject": "pos-store",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
