@@ -1,0 +1,19 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Precio</th>
+      <th>cantidad</th>
+      <th>total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of data2;let i =index">
+      <td>{{product.name}}</td>
+      <td>{{product.price | currency}}</td>
+      <td>{{product.cantidad}}</td>
+      <td>{{product.price * product.cantidad! | currency}}</td>
+      <td><Button (click)="this.removeElement(i)">Eliminar</Button></td>
+    </tr>
+  </tbody>
+</table>

@@ -10,6 +10,8 @@ import { Error404Component } from './error404/error404.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SalesComponent } from './sales/sales.component';
 import { BuscarComponent } from './sales/buscar/buscar.component';
+import { HomeComponent } from './home/home.component';
+import { TablaComponent } from './sales/tabla/tabla.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { BuscarComponent } from './sales/buscar/buscar.component';
     NavbarComponent,
     SalesComponent,
     BuscarComponent,
+    HomeComponent,
+    TablaComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

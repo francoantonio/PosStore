@@ -1,5 +1,8 @@
 <div>
 
-  <input [(ngModel)]="valueInput" (keyup.enter)="buscar()" class="input is-primary" type="number">
-
+  <input autofocus [(ngModel)]="valueInput" (keyup.enter)="buscar()" class="input is-primary" type="number">
+  <div *ngIf="erro" class="notification is-danger mt-4 animate__animated animate__fadeIn">
+    <button class="delete"></button>
+    Error... No existe el producto
+  </div>
 </div>

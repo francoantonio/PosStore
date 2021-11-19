@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Product } from '../product';
 import { ProductsService } from '../services/products.service';
 
 @Component({
@@ -7,10 +8,20 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./buscar.component.scss'],
 })
 export class BuscarComponent {
+  @Output() data = new EventEmitter<Product>();
   constructor(private productService: ProductsService) {}
   valueInput = '';
+  erro=false
   buscar() {
-    this.productService.buscarProducts(this.valueInput);
+    this.productService.getProduct(this.valueInput).subscribe(
+      (res) => this.data.emit({ ...res, cantidad: 1 }),
+      (err) => {
+        console.log('error aqui');
+        this.erro = true
+      setTimeout(() => {
+        this.erro = false
+      }, 1500);}
+    );
     this.valueInput = '';
   }
 }

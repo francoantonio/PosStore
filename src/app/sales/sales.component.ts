@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from './product';
 import { ProductsService } from './services/products.service';
+import { StoreProductService } from './services/store-product.service';
 
 interface product {
   name: string;
@@ -12,38 +14,45 @@ interface product {
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.scss'],
 })
-export class SalesComponent implements OnInit {
-  constructor(private productService: ProductsService) {}
+export class SalesComponent {
+  data: Product[];
+
+  constructor(
+    private productService: ProductsService,
+    public store: StoreProductService
+  ) {
+    this.data = this.store.product;
+  }
   payment = {
     efectivo: 0,
     vuelto: 0,
   };
-  ngOnInit(): void {}
+
   modal = false;
+  GetProduct(query: string) {
+    this.productService
+      .getProduct(query)
+      .subscribe((res) => this.store.addProduct(res));
+  }
+  newElement(e: Product) {
+    this.data.push(e);
+  }
 
-  data = this.productService.carrito();
-  getTotalProduct() {
-    const temporalData = this.data.map((prod) => prod.cantidad! * prod.price);
-    return temporalData.reduce((a: any, b: any) => a + b, 0);
-  }
-  Limpiar() {
-    this.data = [];
-    this.productService.removeCarrito();
-    console.log(this.data);
-  }
   cobrar() {
-    console.log('test');
     this.openModal();
-    console.log(this.payment.efectivo - this.getTotalProduct());
   }
-
   openModal() {
     this.modal = !this.modal;
   }
   darVuelto() {
-    this.payment.vuelto = this.payment.efectivo - this.getTotalProduct();
+    this.payment.vuelto = this.payment.efectivo - this.store.getTotal();
+  }
+  limpiart() {
+    this.store.deleteAll();
+    this.data = this.store.product;
   }
   paymenCancel() {
     this.payment.efectivo = 0;
+    this.modal = !this.modal;
   }
 }

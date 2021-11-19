@@ -1,32 +1,15 @@
 <div class="box">
 
-  <app-buscar></app-buscar>
+  <app-buscar (data)="newElement($event)"></app-buscar>
 
   <div class="mt-3" *ngIf="data.length> 0">
-    <table class="table is-fullwidth">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Precio</th>
-          <th>cantidad</th>
-          <th>total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of data">
-          <td>{{product.name}}</td>
-          <td>{{product.price | currency}}</td>
-          <td>{{product.cantidad}}</td>
-          <td>{{product.price * product.cantidad! | currency}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-tabla [data2]="data"></app-tabla>
     <div class="is-flex is-justify-content-flex-end" style="gap: 30px;">
       <p class="level-item">
-        Total = <strong> {{getTotalProduct() | currency}}</strong>
+        Total = <strong> {{this.store.getTotal() | currency}}</strong>
       </p>
-      <button (click)="cobrar()" class="level-item button is-success">Cobrar</button>
-      <button (click)="Limpiar()" class="level-item button is-danger">Limpiar</button>
+      <button (click)="cobrar() " class="level-item button is-success">Cobrar</button>
+      <button (click)="limpiart()" class="level-item button is-danger">Limpiar</button>
     </div>
   </div>
 </div>
@@ -38,8 +21,8 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Importe a cobrar <strong>{{getTotalProduct() |currency}}</strong></p>
-      <button class="delete" (click)="openModal()" aria-label="close"></button>
+      <p class="modal-card-title">Importe a cobrar <strong>{{this.store.getTotal()|currency}}</strong></p>
+      <button class="delete" (click)="paymenCancel()" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
       <div class="field ">
@@ -51,7 +34,7 @@
       <div *ngIf="payment.efectivo >0" class="field">
         <label class="label">Dar Vuelto</label>
         <div class="control">
-          <div *ngIf="payment.efectivo>getTotalProduct();else noMoney"
+          <div *ngIf="payment.efectivo>this.store.getTotal();else noMoney"
             class="box has-background-success has-text-light">
             importe Correcto !... Dar vuelto <strong> ${{payment.vuelto}}</strong></div>
           <ng-template #noMoney>
