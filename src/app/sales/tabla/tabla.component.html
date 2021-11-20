@@ -14,7 +14,8 @@
       <td>{{product.price | currency}}</td>
       <td>{{product.cantidad}}</td>
       <td>{{product.price * product.cantidad! | currency}}</td>
-      <td><Button class="button is-danger is-small" (click)="this.removeElement(i)">X</Button></td>
+      <td> <Button class="button is-danger is-outlined" (click)="this.store.deleteOneCantidad(i)">Cantidad
+          -1</Button><Button class="button is-danger is-outlined" (click)="this.store.delete(i);">Eliminar</Button></td>
     </tr>
   </tbody>
 </table>

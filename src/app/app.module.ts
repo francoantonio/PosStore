@@ -8,10 +8,8 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { Error404Component } from './error404/error404.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { SalesComponent } from './sales/sales.component';
-import { BuscarComponent } from './sales/buscar/buscar.component';
 import { HomeComponent } from './home/home.component';
-import { TablaComponent } from './sales/tabla/tabla.component';
+import { SalesModule } from './sales/sales.module';
 
 @NgModule({
   declarations: [
@@ -19,12 +17,9 @@ import { TablaComponent } from './sales/tabla/tabla.component';
     ProfileComponent,
     Error404Component,
     NavbarComponent,
-    SalesComponent,
-    BuscarComponent,
     HomeComponent,
-    TablaComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, SalesModule],
   providers: [],
   bootstrap: [AppComponent],
 })

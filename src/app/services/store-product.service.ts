@@ -18,6 +18,10 @@ export class StoreProductService {
   delete(i: number) {
     this._totalProduct.splice(i, 1);
   }
+  deleteOneCantidad(i: number) {
+    this._totalProduct[i].cantidad!--;
+    this._totalProduct[i].cantidad == 0 && this.delete(i);
+  }
   getTotal() {
     const temporalData = this._totalProduct.map(
       (prod) => prod.cantidad! * prod.price

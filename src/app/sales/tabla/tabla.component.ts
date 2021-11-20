@@ -9,9 +9,5 @@ import { StoreProductService } from '../../services/store-product.service';
 })
 export class TablaComponent {
   @Input() data2: Product[] = [];
-  constructor(private store: StoreProductService) {}
-
-  removeElement(i: number) {
-    this.store.delete(i);
-  }
+  constructor(public store: StoreProductService) {}
 }
