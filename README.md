@@ -6,9 +6,24 @@ Un Punto de Venta para un comercio de codigo abierto
 
 - Angular
 - bulma
+- animate css
 
 ---
 
-![Ventas](https://i.imgur.com/JYdwu82.png)
+### Ruta Ventas
 
-![alt](https://i.imgur.com/ZbrOocb.png)
+![Ventas](https://i.imgur.com/Gxtx0Rz.png)
+
+![alt](https://i.imgur.com/VY7rFMJ.png)
+
+![errorCargaProucto](https://i.imgur.com/NQVjXiy.png)
+
+![Cobro](https://i.imgur.com/s0B1gfH.png)
+
+---
+
+Configurar El archivo environment.ts
+
+```ts
+export const environment = { production: true, url: "UrlApi" };
+```
