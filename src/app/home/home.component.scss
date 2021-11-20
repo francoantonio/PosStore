@@ -1,0 +1,28 @@
+.container-home {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.button-Login {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 0;
+}
+
+@media screen and(max-width:768px) {
+  .container-home {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .input-usuario {
+    width: 80vw;
+  }
+  .span-none {
+    display: none !important;
+  }
+}
+@media screen and(max-width:1024) {
+  .input-usuario {
+    width: 100%;
+  }
+}

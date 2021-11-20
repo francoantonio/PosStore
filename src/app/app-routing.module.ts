@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { Error404Component } from './error404/error404.component';
 import { SalesComponent } from './sales/sales.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login',
+    component: HomeComponent,
   },
   {
     path: 'Ventas',
