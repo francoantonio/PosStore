@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './product';
-import { ProductsService } from './services/products.service';
-import { StoreProductService } from './services/store-product.service';
+import { ProductsService } from '../services/products.service';
+import { StoreProductService } from '../services/store-product.service';
 
 interface product {
   name: string;
@@ -16,7 +16,6 @@ interface product {
 })
 export class SalesComponent {
   data: Product[];
-
   constructor(
     private productService: ProductsService,
     public store: StoreProductService
@@ -35,7 +34,12 @@ export class SalesComponent {
       .subscribe((res) => this.store.addProduct(res));
   }
   newElement(e: Product) {
-    this.data.push(e);
+    if (this.data.find(({ id }) => e.id == id)) {
+      const une = this.data.findIndex(({ id }) => e.id == id);
+      this.data[une].cantidad = this.data[une].cantidad! + 1;
+    } else {
+      this.data.push(e);
+    }
   }
 
   cobrar() {
@@ -54,5 +58,18 @@ export class SalesComponent {
   paymenCancel() {
     this.payment.efectivo = 0;
     this.modal = !this.modal;
+  }
+  finCompra() {
+    this.productService.PostCompra({
+      productos: this.data,
+      Date: new Date(),
+      // TODO: Cambiar el vendedor Test, solo se utiliza para testear la aplicacion
+      Vendedor: 'test',
+      Payment: {
+        TotalCompra: this.store.getTotal(),
+        Vueto: this.payment.vuelto,
+        totalAbonado: this.payment.efectivo,
+      },
+    });
   }
 }

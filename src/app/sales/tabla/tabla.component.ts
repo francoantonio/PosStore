@@ -1,6 +1,6 @@
-import { Component, OnInit, Input ,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../product';
-import { StoreProductService } from '../services/store-product.service';
+import { StoreProductService } from '../../services/store-product.service';
 
 @Component({
   selector: 'app-tabla',
@@ -9,9 +9,9 @@ import { StoreProductService } from '../services/store-product.service';
 })
 export class TablaComponent {
   @Input() data2: Product[] = [];
-  constructor(private store :StoreProductService) { }
+  constructor(private store: StoreProductService) {}
 
   removeElement(i: number) {
-        this.store.delete(i)
+    this.store.delete(i);
   }
 }

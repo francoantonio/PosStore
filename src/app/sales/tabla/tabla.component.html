@@ -1,19 +1,20 @@
 <table class="table is-fullwidth">
   <thead>
     <tr>
-      <th>Product</th>
+      <th>Producto</th>
       <th>Precio</th>
-      <th>cantidad</th>
-      <th>total</th>
+      <th>Cantidad</th>
+      <th>Total</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let product of data2;let i =index">
-      <td>{{product.name}}</td>
+      <td>{{product.name | uppercase }}</td>
       <td>{{product.price | currency}}</td>
       <td>{{product.cantidad}}</td>
       <td>{{product.price * product.cantidad! | currency}}</td>
-      <td><Button (click)="this.removeElement(i)">Eliminar</Button></td>
+      <td><Button class="button is-danger is-small" (click)="this.removeElement(i)">X</Button></td>
     </tr>
   </tbody>
 </table>

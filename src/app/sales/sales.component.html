@@ -8,8 +8,8 @@
       <p class="level-item">
         Total = <strong> {{this.store.getTotal() | currency}}</strong>
       </p>
-      <button (click)="cobrar() " class="level-item button is-success">Cobrar</button>
-      <button (click)="limpiart()" class="level-item button is-danger">Limpiar</button>
+      <button (click)="cobrar() " class="level-item button is-success is-large">Cobrar</button>
+      <button (click)="limpiart()" class="level-item button is-danger is-large">Limpiar</button>
     </div>
   </div>
 </div>
@@ -46,7 +46,8 @@
       </div>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">Finalizar Compra</button>
+      <!--  TODO: Modificar el estado del boton si el vuelto es menor a 0 -->
+      <button (click)="finCompra()" class="button is-success">Finalizar Compra</button>
       <button (click)="paymenCancel()" class="button is-danger">Cancelar</button>
     </footer>
   </div>
