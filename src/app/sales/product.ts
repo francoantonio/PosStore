@@ -1,6 +1,9 @@
 export interface Product {
   id: number;
   name: string;
-  price: number;
+  price_Publico: number;
+  price_Compra: number;
+  stock: number;
+  ganancia: string;
   cantidad?: number;
 }

@@ -24,7 +24,7 @@ export class StoreProductService {
   }
   getTotal() {
     const temporalData = this._totalProduct.map(
-      (prod) => prod.cantidad! * prod.price
+      (prod) => prod.cantidad! * prod.price_Publico
     );
     return temporalData.reduce((a, b) => a + b, 0);
   }

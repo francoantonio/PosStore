@@ -11,7 +11,7 @@ import { CompraFinal } from '../sales/compra-final';
 export class ProductsService {
   constructor(private http: HttpClient) {}
   getProduct(query: string) {
-    return this.http.get<Product>(environment.url + query);
+    return this.http.get<Product>(environment.url + 'products/' + query);
   }
   PostCompra(body: CompraFinal) {
     console.log(body);
