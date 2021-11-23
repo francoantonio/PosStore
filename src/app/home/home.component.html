@@ -1,51 +1,91 @@
 <div class="container-home">
-
   <div class="card car-bienvenido">
     <div class="card-header">
       <div class="card-header-title">
-        <h1 class="title">Bienvenido a <strong class="has-text-success">Store Pos</strong></h1>
+        <h1 class="title">
+          Bienvenido a <strong class="has-text-success">Store Pos</strong>
+        </h1>
       </div>
     </div>
     <div class="card-content">
       <div class="content">
         <p>Un sistema para gestionar su comercio</p>
-        <p>Un proyecto de codigo abierto ❤️ </p>
+        <p>Un proyecto de codigo abierto ❤️</p>
       </div>
     </div>
   </div>
+  <!-- Login -->
   <div class="card">
-
     <div class="modal-card">
       <div class="card-header">
         <div class="card-header-title">
           <h1 class="title">Ingresar al Sistema</h1>
         </div>
       </div>
-      <section class="card-body">
-        <div class="field ">
-          <label class="label">Usuario</label>
-          <div class="control has-icons-left">
-            <input class="input input-usuario" type="text" placeholder="Perro 2020">
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
+      <form [formGroup]="formGroup">
+        <section class="card-body">
+          <div class="field">
+            <label class="label">Usuario</label>
+            <div class="control has-icons-left">
+              <input
+                autocomplete="off"
+                autofocus
+                class="input is-success"
+                [ngClass]="{ 'is-danger': getError('usuario') }"
+                type="text"
+                placeholder="Perro 2020"
+                formControlName="usuario"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <article
+                *ngIf="getError('usuario')"
+                class="message is-danger is-small"
+              >
+                <div class="message-body">
+                  {{ getError("usuario") }}
+                </div>
+              </article>
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <label class="label">Contrasena</label>
-          <div class="control has-icons-left">
-            <input class="input input-usuario" type="password" placeholder="*********">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
+          <div class="field">
+            <label class="label">Contrasena</label>
+            <div class="control has-icons-left">
+              <input
+                autocomplete="off"
+                class="input is-success"
+                [ngClass]="{ 'is-danger': getError('password') }"
+                type="password"
+                placeholder="*********"
+                formControlName="password"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+              <article
+                *ngIf="getError('password')"
+                class="message is-danger is-small"
+              >
+                <div class="message-body">
+                  {{ getError("password") }}
+                </div>
+              </article>
+            </div>
           </div>
-        </div>
-      </section>
-      <footer class="button-Login">
-        <button class="button is-success">Ingresar</button>
-        <button class="button is-danger">Cancelar</button>
-      </footer>
+        </section>
+        <footer class="button-Login">
+          <button
+            (click)="login()"
+            [disabled]="formGroup.invalid"
+            class="button is-success"
+          >
+            Ingresar
+          </button>
+          <button (click)="Limpiar()" class="button is-danger">Cancelar</button>
+        </footer>
+      </form>
     </div>
   </div>
 </div>
