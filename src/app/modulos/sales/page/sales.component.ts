@@ -15,6 +15,7 @@ export class SalesComponent implements OnDestroy {
     cashReturn: 0,
   };
   modal = false;
+
   constructor(
     private productService: ProductsService,
     public store: StoreProductService
@@ -26,11 +27,11 @@ export class SalesComponent implements OnDestroy {
     this.clean();
   }
 
-  GetProduct(query: string) {
+  /*  GetProduct(query: string) {
     this.productService
       .getProduct(query)
       .subscribe((res) => this.store.addProduct(res));
-  }
+  } */
   newElement(e: Product) {
     if (this.data.find(({ id }) => e.id == id)) {
       const une = this.data.findIndex(({ id }) => e.id == id);

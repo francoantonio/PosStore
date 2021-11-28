@@ -1,19 +1,18 @@
-<div class="field">
-  <p class="control has-icons-left">
-    <input
-      autofocus
-      [(ngModel)]="valueInput"
-      (keyup.enter)="buscar()"
-      class="input is-primary"
-      [ngClass]="{ 'is-danger': error }"
-      type="number"
-    />
-
-    <span class="icon is-small is-left">
-      <i class="pi pi-search"></i>
-    </span>
-  </p>
-</div>
-<p *ngIf="error" class="help is-danger">
+<p-inputNumber
+  [(ngModel)]="valueInput"
+  (keyup.enter)="buscar()"
+  autofocus
+  [useGrouping]="false"
+  [min]="0"
+  [size]="50"
+></p-inputNumber>
+<!-- <p *ngIf="error" class="help is-danger">
   Error !!!!, no existe un producto con ese codigo de barra
 </p>
+ -->
+<!-- TODO: implementar mensaje de eerrror -->
+<p-messages *ngIf="error.status" severity="error">
+  <ng-template pTemplate>
+    <span class="custom-message">{{ error.msg }}</span>
+  </ng-template>
+</p-messages>

@@ -9,6 +9,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
+
+import { TableModule } from 'primeng/table';
+
 @NgModule({
   exports: [
     ButtonModule,
@@ -20,6 +25,9 @@ import { ToastModule } from 'primeng/toast';
     AvatarModule,
     MessagesModule,
     ToastModule,
+    PanelModule,
+    TableModule,
+    DialogModule,
   ],
 })
 export class PrimeNgModule {}

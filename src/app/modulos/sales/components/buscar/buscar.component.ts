@@ -11,14 +11,20 @@ export class BuscarComponent {
   @Output() data = new EventEmitter<Product>();
   constructor(private productService: ProductsService) {}
   valueInput = '';
-  error = false;
+  error = {
+    status: false,
+    msg: '`',
+  };
   buscar() {
     this.productService.getProduct(this.valueInput).subscribe(
       (res) => this.data.emit({ ...res, cantidad: 1 }),
       (err) => {
-        this.error = true;
+        this.error.status = true;
+        this.error.msg =
+          err.error.msg || 'Error con el servidor, Contacte Al administrador ';
         setTimeout(() => {
-          this.error = false;
+          this.error.status = false;
+          this.error.msg = '';
         }, 1500);
       }
     );

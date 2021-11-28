@@ -1,89 +1,121 @@
-<div class="box">
-  <app-buscar (data)="newElement($event)"></app-buscar>
+<p-card>
+  <ng-template pTemplate="content">
+    <div class="grid">
+      <app-buscar class="col-12" (data)="newElement($event)"></app-buscar>
 
-  <div class="mt-3" *ngIf="data.length > 0">
-    <app-tabla [data2]="data"></app-tabla>
-    <div class="is-flex is-justify-content-flex-end mt-3" style="gap: 30px">
-      <p class="level-item">
-        Total = <strong> {{ this.store.getTotal() | currency: "$" }}</strong>
-      </p>
-      <button
-        pButton
-        (click)="cobrar()"
-        icon="pi pi-money-bill"
-        label="Cobrar"
-        iconPos="left"
-      ></button>
-      <button
-        pButton
-        label="Limpiar"
-        icon="pi pi-trash"
-        (click)="clean()"
-        class="p-button-danger"
-      ></button>
+      <div *ngIf="data.length >= 1" class="col-12">
+        <!-- BUG: Error al poner [value]=this.stopre.product.. Cambiando el valor a 10 no se duplican las tablas -->
+        <p-table
+          [value]="[10]"
+          styleClass="p-datatable-sm"
+          responsiveLayout="scroll"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantitad</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-car>
+            <tr *ngFor="let product of this.store.product; let i = index">
+              <td>{{ product.name }}</td>
+              <td>{{ product.priceGeneral }}</td>
+              <td>{{ product.cantidad }}</td>
+              <td>{{ product.priceGeneral * product.cantidad! | currency }}</td>
+              <td>
+                <Button
+                  pButton
+                  class="p-button-danger p-button-outlined"
+                  icon="pi pi-trash"
+                  label="1"
+                  (click)="this.store.deleteOneCantidad(i)"
+                >
+                </Button>
+                <Button
+                  pButton
+                  class="p-button-danger p-button-outlined"
+                  icon="pi pi-trash"
+                  (click)="this.store.delete(i)"
+                ></Button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    <div *ngIf="data.length >= 1" class="col-12">
+      <div class="flex justify-content-end" style="gap: 30px">
+        <p>
+          Total = <strong> {{ this.store.getTotal() | currency: "$" }}</strong>
+        </p>
+        <button
+          pButton
+          (click)="cobrar()"
+          icon="pi pi-money-bill"
+          label="Cobrar"
+          iconPos="left"
+        ></button>
+        <button
+          pButton
+          label="Limpiar"
+          icon="pi pi-trash"
+          (click)="clean()"
+          class="p-button-danger"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-card>
+
+<p-dialog [(visible)]="modal">
+  <ng-template pTemplate="header">
+    <p class="modal-card-title">
+      Importe a cobrar <strong>{{ this.store.getTotal() | currency }}</strong>
+    </p>
+  </ng-template>
+  <div class="field">
+    <label class="label">Dinero recibido</label>
+    <div class="control">
+      <!-- BUG: Comportamineto extrano del input -->
+      <p-inputNumber
+        [(ngModel)]="payment.cash"
+        autofocus
+        (keyup)="calcCashReturn()"
+        type="number"
+        mode="decimal"
+        locale="en-US"
+        [minFractionDigits]="2"
+      ></p-inputNumber>
     </div>
   </div>
-</div>
-
-<div [class.is-active]="modal" class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">
-        Importe a cobrar <strong>{{ this.store.getTotal() | currency }}</strong>
-      </p>
-      <button
-        class="delete"
-        (click)="paymenCancel()"
-        aria-label="close"
-      ></button>
-    </header>
-    <section class="modal-card-body">
-      <div class="field">
-        <label class="label">Dinero recibido</label>
-        <div class="control">
-          <input
-            [(ngModel)]="payment.cash"
-            autofocus
-            (keyup)="calcCashReturn()"
-            required
-            min="1"
-            class="input"
-            type="number"
-          />
-        </div>
-      </div>
-      <div *ngIf="payment.cash > 0" class="field">
-        <label class="label">Dar Vuelto</label>
-        <div class="control">
-          <div
-            *ngIf="payment.cash > this.store.getTotal(); else noMoney"
-            class="box has-background-success has-text-light"
+  <div *ngIf="payment.cash > 0">
+    <p-messages
+      *ngIf="payment.cash > this.store.getTotal(); else noMoney"
+      severity="success"
+    >
+      <ng-template pTemplate>
+        <span class="custom-message">Su vuelto {{ payment.cashReturn }}.</span>
+        <!-- BUG: Error al dar decimales -->
+      </ng-template>
+    </p-messages>
+    <ng-template #noMoney>
+      <p-messages severity="error">
+        <ng-template pTemplate>
+          <span class="custom-message">
+            No Alcanza a pagar... falta
+            <strong> ${{ payment.cashReturn }}</strong></span
           >
-            importe Correcto !... Dar vuelto
-            <strong> ${{ payment.cashReturn }}</strong>
-          </div>
-          <ng-template #noMoney>
-            <article class="message is-danger">
-              <div class="message-body">
-                <p>
-                  No Alcanza a pagar... falta
-                  <strong> ${{ payment.cashReturn }}</strong>
-                </p>
-              </div>
-            </article>
-          </ng-template>
-        </div>
-      </div>
-    </section>
-    <footer class="modal-card-foot">
-      <!--  TODO: Modificar el estado del boton si el vuelto es menor a 0 -->
-      <button (click)="endPurchase()" class="button is-success">
-        Finalizar Compra
-      </button>
-      <button (click)="paymenCancel()" class="button is-danger">
-        Cancelar
-      </button>
-    </footer>
+        </ng-template>
+      </p-messages>
+    </ng-template>
   </div>
-</div>
+  <ng-template pTemplate="footer">
+    <button pButton (click)="endPurchase()">Finalizar Compra</button>
+    <button pButton (click)="paymenCancel()" class="p-button-danger">
+      Cancelar
+    </button>
+  </ng-template>
+</p-dialog>
