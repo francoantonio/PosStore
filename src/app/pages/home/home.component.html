@@ -15,69 +15,63 @@
     </div>
   </div>
   <!-- Login -->
-  <div class="card">
-    <div class="modal-card">
-      <div class="card-header">
-        <div class="card-header-title">
-          <h1 class="title">Ingresar al Sistema</h1>
-        </div>
-      </div>
+
+  <p-card header="Ingresar al Sistema">
+    <ng-template pTemplate="content">
       <form [formGroup]="formGroup">
         <section class="card-body">
-          <div class="field">
-            <label class="label">Usuario</label>
-            <div class="control has-icons-left">
-              <input
-                autocomplete="off"
-                autofocus
-                class="input is-success"
-                [ngClass]="{ 'is-danger': getError('usuario') }"
-                type="text"
-                placeholder="AAA333"
-                formControlName="usuario"
-              />
-              <span class="icon is-small is-left">
-                <i class="bi bi-person-fill"></i>
-              </span>
-              <p *ngIf="getError('usuario')" class="help is-danger">
-                {{ getError("usuario") }}
-              </p>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Contrasena</label>
-            <div class="control has-icons-left">
-              <input
-                autocomplete="off"
-                class="input is-success"
-                [ngClass]="{ 'is-danger': getError('password') }"
-                type="password"
-                placeholder="*********"
-                formControlName="password"
-              />
-              <span class="icon is-small is-left">
-                <i class="bi bi-key-fill"></i>
-              </span>
-              <p *ngIf="getError('password')" class="help is-danger">
-                {{ getError("password") }}
-              </p>
-              <!-- TODO: Implementar componente para el manejo de error en las validaciones -->
-              <!-- TODO: 2 Mejor Implementar una directiva -->
-              <!-- <app-alert *ngIf="getError('password')" msg="hello world" ></app-alert> -->
-            </div>
-          </div>
+          <!-- <label class="label">Usuario</label> -->
+          <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-user"></i>
+            <input
+              autocomplete="off"
+              autofocus
+              class="p-inputtext-lg"
+              [ngClass]="{ 'is-danger': getError('usuario') }"
+              type="text"
+              formControlName="usuario"
+              pInputText
+            />
+            <label for="float-input">Usuario</label>
+          </span>
+          <p-messages *ngIf="getError('usuario')" severity="error">
+            <ng-template pTemplate>
+              <span class="custom-message"> {{ getError("usuario") }}</span>
+            </ng-template>
+          </p-messages>
+          <span class="p-float-label p-input-icon-left mt-5">
+            <i class="pi pi-key"></i>
+            <input
+              autocomplete="off"
+              class="p-inputtext-lg"
+              [ngClass]="{ 'is-danger': getError('password') }"
+              type="password"
+              formControlName="password"
+              pInputText
+            />
+            <label for="float-input">Contraseña</label>
+          </span>
+          <p-messages *ngIf="getError('password')" severity="error">
+            <ng-template pTemplate>
+              <span class="custom-message"> {{ getError("password") }}</span>
+            </ng-template>
+          </p-messages>
         </section>
-        <footer class="button-Login">
-          <button
-            (click)="login()"
-            [disabled]="formGroup.invalid"
-            class="button is-success"
-          >
-            Ingresar
-          </button>
-          <button (click)="Limpiar()" class="button is-danger">Cancelar</button>
-        </footer>
       </form>
-    </div>
-  </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <button
+        pButton
+        (click)="login()"
+        [disabled]="formGroup.invalid"
+        class="p-button-info"
+      >
+        Ingresar
+      </button>
+      <button pButton (click)="Limpiar()" class="p-button-danger">
+        Cancelar
+      </button>
+    </ng-template>
+  </p-card>
 </div>

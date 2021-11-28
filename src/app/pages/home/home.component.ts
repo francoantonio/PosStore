@@ -8,10 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   public formGroup!: FormGroup;
-  public errors= {
-    usuario:'',
-    password:'',
-  }
+  public errors = {
+    usuario: '',
+    password: '',
+  };
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   buildForm() {
     this.formGroup = this.formBuilder.group({
+      // FIXME: Validar Space Black NULL
       usuario: [
         '',
         [Validators.required, Validators.minLength(6), Validators.maxLength(6)],

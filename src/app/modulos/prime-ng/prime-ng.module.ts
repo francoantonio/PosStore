@@ -6,6 +6,9 @@ import { MenubarModule } from 'primeng/menubar';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
+import { AvatarModule } from 'primeng/avatar';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   exports: [
     ButtonModule,
@@ -14,6 +17,9 @@ import { InputTextModule } from 'primeng/inputtext';
     BreadcrumbModule,
     InputNumberModule,
     InputTextModule,
+    AvatarModule,
+    MessagesModule,
+    ToastModule,
   ],
 })
 export class PrimeNgModule {}
