@@ -1,47 +1,18 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" [routerLink]="['/']">
-      <h1 class="title is-3 has-text-success">Store Pos</h1>
-    </a>
-    <!-- TODO: fix button screen small -->
+<nav
+  class="bg-blue-400 px-4 flex justify-content-between align-items-center py-2"
+>
+  <a routerLink="/" class="text-white text-3xl"> StorePost </a>
+  <div class="flex justify-content-start flex-grow-1 mx-3">
     <a
-      role="button"
-      class="navbar-burger"
-      aria-label="menu"
-      aria-expanded="false"
-      data-target="navbarExampleTransparentExample"
+      class="text-white text-2xl mx-1"
+      *ngFor="let ruta of rutas"
+      routerLink="{{ ruta.url }}"
+      >{{ ruta.name }}</a
     >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
   </div>
 
-  <div id="navbarExampleTransparentExample" class="navbar-menu">
-    <div class="navbar-start">
-      <!-- TODO: Implement routas desde el controlador dependiendo del usuario -->
-
-      <a class="navbar-item" routerLink="/Ventas"> Ventas </a>
-      <a class="navbar-item" routerLink="/Deposito"> Deposito </a>
-    </div>
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <!-- TODO: Perfil de usuario, Img y boton salir -->
-        <div class="nav-perfil navbar-item has-dropdown is-hoverable">
-          <figure class="image is-24x24">
-            <!-- TODO: Implement directive !userData.img -->
-            <img class="is-rounded" [src]="userData.img" />
-          </figure>
-          <p class="ml-2">{{ userData.name }}</p>
-
-          <div class="navbar-dropdown">
-            <a class="navbar-item"> Historial </a>
-            <a class="navbar-item"> Perfil </a>
-            <hr class="navbar-divider" />
-            <a class="navbar-item has-text-danger"> Salir </a>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="flex align-items-center">
+    <p-avatar [image]="userData.img" shape="circle" size="large"></p-avatar>
+    <span class="text-white text-xl">{{ userData.name }}</span>
   </div>
 </nav>
