@@ -10,6 +10,7 @@ import { Error404Component } from './pages/error404/error404.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from './modulos/shared/shared.module';
 import { PrimeNgModule } from './modulos/prime-ng/prime-ng.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PrimeNgModule } from './modulos/prime-ng/prime-ng.module';
     PrimeNgModule,
     ReactiveFormsModule,
     SharedModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
