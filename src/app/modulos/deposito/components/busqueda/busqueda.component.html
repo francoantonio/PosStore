@@ -1,0 +1,15 @@
+<div class="field has-addons-centered">
+  <div class="control has-icons-left">
+    <input
+      autofocus
+      [(ngModel)]="valueInput"
+      (keyup.control)="test()"
+      (keyup.enter)="buscar()"
+      class="input is-primary"
+      type="number"
+    />
+    <span class="icon is-small is-left">
+      <i class="bi bi-upc-scan"></i>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="box">
+  <app-busqueda (data)="dataemitida($event)"></app-busqueda>
+  <div *ngIf="formGroup">
+    <h1 class="is-size-2">Editar un Producto</h1>
+    <form [formGroup]="formGroup">
+      <div class="field">
+        <label class="label">Nombre</label>
+        <p class="control has-icons-left">
+          <input class="input" formControlName="name" type="text" />
+          <span class="icon is-left">
+            <i class="bi bi-card-tex"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <label class="label">Codigo de barra</label>
+        <p class="control has-icons-left">
+          <input class="input" formControlName="id" type="text" />
+          <span class="icon is-left">
+            <i class="bi bi-upc-scan"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field is-grouped">
+        <div class="field">
+          <label class="label">Precio Venta</label>
+          <p class="control has-icons-left">
+            <input class="input" formControlName="priceGeneral" type="number" />
+            <span class="icon is-left">
+              <i class="bi bi-currency-dollar"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Precio Compra</label>
+          <p class="control has-icons-left">
+            <input class="input" formControlName="priceInput" ype="number" />
+            <span class="icon is-left">
+              <i class="bi bi-currency-dollar"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Stock</label>
+          <p class="control has-icons-left">
+            <input class="input" formControlName="stock" type="number" />
+            <span class="icon is-left">
+              <i class="bi bi-grid-3x3-gap-fill"></i>
+            </span>
+          </p>
+        </div>
+      </div>
+      <button
+        [disabled]="formGroup.invalid"
+        class="button is-info"
+        (click)="updateProducto()"
+      >
+        <span>Enviar Nuevos cambios</span>
+      </button>
+    </form>
+  </div>
+</div>

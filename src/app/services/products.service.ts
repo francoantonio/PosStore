@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product } from '../sales/product';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CompraFinal } from '../sales/compra-final';
+import { EndPurchase, Product } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +11,14 @@ export class ProductsService {
   getProduct(query: string) {
     return this.http.get<Product>(environment.url + 'products/' + query);
   }
-  PostCompra(body: CompraFinal) {
+  PostCompra(body: EndPurchase) {
     console.log(body);
-    /*  return this.http.post(environment.url, body); */
+    return this.http.post(environment.url, body);
   }
+
+  postProdcut(body: Product, id: string) {
+    console.log(body);
+    return this.http.put(environment.url + 'products/' + id, body);
+  }
+  postNewProduct(body: Product) {}
 }

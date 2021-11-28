@@ -1,0 +1,19 @@
+<div class="field">
+  <p class="control has-icons-left">
+    <input
+      autofocus
+      [(ngModel)]="valueInput"
+      (keyup.enter)="buscar()"
+      class="input is-primary"
+      [ngClass]="{ 'is-danger': error }"
+      type="number"
+    />
+
+    <span class="icon is-small is-left">
+      <i class="pi pi-search"></i>
+    </span>
+  </p>
+</div>
+<p *ngIf="error" class="help is-danger">
+  Error !!!!, no existe un producto con ese codigo de barra
+</p>

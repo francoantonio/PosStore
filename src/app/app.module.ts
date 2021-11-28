@@ -5,27 +5,26 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './profile/profile.component';
-import { Error404Component } from './error404/error404.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { SalesModule } from './sales/sales.module';
-import { DepositoModule } from './deposito/deposito.module';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { Error404Component } from './pages/error404/error404.component';
+import { HomeComponent } from './pages/home/home.component';
+import { SharedModule } from './modulos/shared/shared.module';
+import { PrimeNgModule } from './modulos/prime-ng/prime-ng.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     Error404Component,
-    NavbarComponent,
     HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    PrimeNgModule,
     ReactiveFormsModule,
-    SalesModule,
-    DepositoModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

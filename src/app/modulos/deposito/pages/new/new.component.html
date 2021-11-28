@@ -1,0 +1,88 @@
+<div>
+  <h1 class="is-size-2">Cargar un Producto</h1>
+  <form [formGroup]="formGroup">
+    <div class="field">
+      <label class="label">Nombre</label>
+      <p class="control has-icons-left">
+        <input class="input" pInputText formControlName="name" type="text" />
+        <span class="icon is-left">
+          <i class="bi bi-card-tex"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field">
+      <label class="label">Codigo de barra</label>
+      <p class="control has-icons-left">
+        <p-inputNumber
+          [useGrouping]="false"
+          formControlName="id"
+        ></p-inputNumber>
+        <span class="icon is-left">
+          <i class="bi bi-upc-scan"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field is-grouped">
+      <!-- Start Input Number -->
+      <div class="field">
+        <label class="label">Precio Venta</label>
+        <p class="control has-icons-left">
+          <p-inputNumber
+            formControlName="priceGeneral"
+            mode="currency"
+            currency="USD"
+            locale="en-US"
+            [minFractionDigits]="2"
+            [maxFractionDigits]="2"
+            locale="en-US"
+            [min]="0"
+          ></p-inputNumber>
+          <span class="icon is-left">
+            <i class="bi bi-currency-dollar"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <label class="label">Precio Compra</label>
+        <p class="control has-icons-left">
+          <p-inputNumber
+            formControlName="priceInput"
+            mode="currency"
+            currency="USD"
+            locale="en-US"
+            [minFractionDigits]="2"
+            [maxFractionDigits]="2"
+            locale="en-US"
+            [min]="0"
+          ></p-inputNumber>
+          <span class="icon is-left">
+            <i class="bi bi-currency-dollar"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <label class="label">Stock</label>
+        <p class="control has-icons-left">
+          <p-inputNumber
+            formControlName="stock"
+            [showButtons]="true"
+            incrementButtonClass="p-button-success"
+            incrementButtonIcon="pi pi-plus"
+            decrementButtonIcon="pi pi-minus"
+            [min]="0"
+          ></p-inputNumber>
+          <span class="icon is-left">
+            <i class="bi bi-grid-3x3-gap-fill"></i>
+          </span>
+        </p>
+      </div>
+    </div>
+    <button
+      [disabled]="formGroup.invalid"
+      class="button is-info"
+      (click)="pushProduct()"
+    >
+      <span>Guardar Producto</span>
+    </button>
+  </form>
+</div>

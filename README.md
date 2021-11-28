@@ -7,6 +7,7 @@ Un Punto de Venta para un comercio de codigo abierto
 - Angular
 - bulma
 - animate css
+- Icons Bootstrap
 
 ---
 

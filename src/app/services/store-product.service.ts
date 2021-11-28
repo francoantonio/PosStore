@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../sales/product';
+import { Product } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class StoreProductService {
   }
   getTotal() {
     const temporalData = this._totalProduct.map(
-      (prod) => prod.cantidad! * prod.price_Publico
+      (prod) => prod.cantidad! * prod.priceGeneral
     );
     return temporalData.reduce((a, b) => a + b, 0);
   }

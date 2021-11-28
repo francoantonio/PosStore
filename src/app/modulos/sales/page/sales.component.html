@@ -1,0 +1,89 @@
+<div class="box">
+  <app-buscar (data)="newElement($event)"></app-buscar>
+
+  <div class="mt-3" *ngIf="data.length > 0">
+    <app-tabla [data2]="data"></app-tabla>
+    <div class="is-flex is-justify-content-flex-end mt-3" style="gap: 30px">
+      <p class="level-item">
+        Total = <strong> {{ this.store.getTotal() | currency: "$" }}</strong>
+      </p>
+      <button
+        pButton
+        (click)="cobrar()"
+        icon="pi pi-money-bill"
+        label="Cobrar"
+        iconPos="left"
+      ></button>
+      <button
+        pButton
+        label="Limpiar"
+        icon="pi pi-trash"
+        (click)="clean()"
+        class="p-button-danger"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<div [class.is-active]="modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        Importe a cobrar <strong>{{ this.store.getTotal() | currency }}</strong>
+      </p>
+      <button
+        class="delete"
+        (click)="paymenCancel()"
+        aria-label="close"
+      ></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="field">
+        <label class="label">Dinero recibido</label>
+        <div class="control">
+          <input
+            [(ngModel)]="payment.cash"
+            autofocus
+            (keyup)="calcCashReturn()"
+            required
+            min="1"
+            class="input"
+            type="number"
+          />
+        </div>
+      </div>
+      <div *ngIf="payment.cash > 0" class="field">
+        <label class="label">Dar Vuelto</label>
+        <div class="control">
+          <div
+            *ngIf="payment.cash > this.store.getTotal(); else noMoney"
+            class="box has-background-success has-text-light"
+          >
+            importe Correcto !... Dar vuelto
+            <strong> ${{ payment.cashReturn }}</strong>
+          </div>
+          <ng-template #noMoney>
+            <article class="message is-danger">
+              <div class="message-body">
+                <p>
+                  No Alcanza a pagar... falta
+                  <strong> ${{ payment.cashReturn }}</strong>
+                </p>
+              </div>
+            </article>
+          </ng-template>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <!--  TODO: Modificar el estado del boton si el vuelto es menor a 0 -->
+      <button (click)="endPurchase()" class="button is-success">
+        Finalizar Compra
+      </button>
+      <button (click)="paymenCancel()" class="button is-danger">
+        Cancelar
+      </button>
+    </footer>
+  </div>
+</div>
