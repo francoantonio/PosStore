@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
   }
   login() {
     // TODO: Implement login service method
+
     const { usuario, password } = this.formGroup.value;
     console.log(usuario, password);
   }
@@ -51,5 +52,7 @@ export class HomeComponent implements OnInit {
   }
   Limpiar() {
     // TODO: implementar Limpiar los input
+    this.formGroup.get('usuario')?.setValue('');
+    this.formGroup.get('password')?.setValue('');
   }
 }
